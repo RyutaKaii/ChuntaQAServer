@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qa.mybatis">
+    <select id="selectList" resultType="com.controller.chuntaqa.response.ResRecord" parameterType="String">
+        select
+            no,
+            question,
+            answer
+        from
+            qatable
+        where
+            title = #{title};
+    </select>
+
+    <!-- noはdatabase側のautoincrement機能を用いるため未指定 -->
+    <insert id="insertOne" parameterType="map">
+        insert into
+            qatable
+        (title, question, answer)
+        values
+            (#{title}, #{question}, #{answer});
+    </insert>
+
+    <update id="updateOne" parameterType="map">
+        update
+            qatable
+        set
+            question = #{question}, answer = #{answer}
+        where
+            title = #{title} and no = #{no};
+    </update>
+
+    <delete id="deleteOne" parameterType="map">
+        delete from
+            qatable
+        where
+            title = #{title} and no = #{no};
+    </delete>
+
+</mapper>
